@@ -58,8 +58,8 @@ unsigned int randXbitInt(unsigned int n) {
 //tests for primality and return 1 if N is probably prime and 0 if N is composite
 unsigned int isProbablyPrime(unsigned int N) {
 
- // printf("Enter a value to check if it is probably prime: ");
- // scanf("%d", &N);
+  //printf("Enter a value to check if it is probably prime: ");
+  //scanf("%d", &N);
 
 
   if (N%2==0) return 0; //not interested in even numbers (including 2)
@@ -95,32 +95,40 @@ unsigned int isProbablyPrime(unsigned int N) {
 
   //if we're testing a large number switch to Miller-Rabin primality test
   /* Q2.1: Complete this part of the isProbablyPrime function using the Miller-Rabin pseudo-code */
+  //scanf("%d", &N);
   unsigned int r,d;
   r=0;
+  unsigned int nMinusOne = N-1;
+  while ((nMinusOne) % 2 ==0) {
+    nMinusOne /= 2;
+    //d = nMinusOne;
+    r+=1;
+  }
+  d = nMinusOne;
   for (unsigned int n=0;n<NsmallPrimes;n++) {
     // computing r and d in the equation N-1=d*(2^r)
-    unsigned int nMinusOne = N-1;
-    while ((nMinusOne) % 2 ==0) {
-      nMinusOne /= 2;
-      d = nMinusOne;
-      r+=1;
-    }
-
+    //unsigned int nMinusOne = N-1;
+    //while ((nMinusOne) % 2 ==0) {
+      //nMinusOne /= 2;
+      //d = nMinusOne;
+      //r+=1;
+    //}
+    //d = nMinusOne;
     //Miller-Rabin Test
     unsigned int x = modExp(smallPrimeList[n],d,N);
     if (x==1 || x==N-1) {
       continue;
     }
-    for (int i = 0; i <= r-1;i++) {
+    for (int i = 1; i < r;i++) {
       x = modprod(x,x,N);
       if (x==1) {
         return 0;
       }
       if (x==(N-1)) {
-        continue;
+        break;
       }
     }
-    return 0;
+    //return 0;
   }
   return 1; //true
 }
