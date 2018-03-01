@@ -106,14 +106,7 @@ unsigned int isProbablyPrime(unsigned int N) {
   }
   d = nMinusOne;
   for (unsigned int n=0;n<NsmallPrimes;n++) {
-    // computing r and d in the equation N-1=d*(2^r)
-    //unsigned int nMinusOne = N-1;
-    //while ((nMinusOne) % 2 ==0) {
-      //nMinusOne /= 2;
-      //d = nMinusOne;
-      //r+=1;
-    //}
-    //d = nMinusOne;
+  
     //Miller-Rabin Test
     unsigned int x = modExp(smallPrimeList[n],d,N);
     if (x==1 || x==N-1) {
@@ -137,22 +130,11 @@ unsigned int isProbablyPrime(unsigned int N) {
 unsigned int findGenerator(unsigned int p) {
   /* Q3.3: complete this function and use the fact that p=2*q+1 to quickly find a generator */
  
-  //Unsure of what exactly you were looking for in 3.3, so I found
-  //the generator that appears after q, where both p and q are prime 
-  //numbers. This imporves efficiency beacuse you dont have to loop
-  //through every number in Zp.
-
-  int q,x,gen;
-  for (q = (p-1)/2; q < p; q++) {
-    int a = q;
-    for (x=2; x<(p-1); x++) {
-      a = (a*q)%p;
-      if (a==1) {
-        break;
-      }
-    }
-    if (x==p-1) { 
-      return q;
+  int q,g;
+  q = (p-1)/2;
+  for (g=2; g<p; g++) {
+    if((g*g)%p != 1 && (unsigned int)pow(g, q)%p != 1) {
+      return g;
     }
   }
 }
