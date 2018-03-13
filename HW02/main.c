@@ -62,4 +62,5 @@ int main (int argc, char **argv) {
 	printf("g = %u is a generator of Z_%u \n", g, p);  
 
   return 0;
+
 }
