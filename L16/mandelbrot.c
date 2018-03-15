@@ -117,7 +117,7 @@ int main(int argc, char **argv){
   mandelbrot(Nre, Nim, cmin, cmax, count); 
   
   // Q2d: complete this to read time after calling mandelbrot using OpenMP wall clock time
-  double end = omp_get_wtime() - start;
+  double end = omp_get_wtime();
   
   // print elapsed time
   printf("elapsed = %g\n", end-start);
