@@ -94,6 +94,7 @@ int main(int argc, char **argv){
 
   // Q2b: set the number of OpenMP threads to be Nthreads here:
   Nthreads = atoi(argv[argc-1]);
+  omp_set_num_threads(Nthreads);
   // storage for the iteration counts
   float *count = (float*) malloc(Nre*Nim*sizeof(float));
 
