@@ -20,10 +20,11 @@ int main(int argc, char **argv) {
   double seed = rank;
   srand48(seed);
 
-  long long int Ntrials = 10000000;
+  /*long long int Ntrials = 10000000;
 
   MPI_Barrier(MPI_COMM_WORLD);
   double startTime = MPI_Wtime();
+  */
 
   for (long long int n=0; n<Ntrials; n++) {
     //gererate two random numbers
@@ -36,9 +37,20 @@ int main(int argc, char **argv) {
     //check if its in the circle
     if (sqrt(x*x+y*y)<=1) Ncircle++;
     Ntotal++;
+      if (n%100==0) {
+        double recv; 
+        float sum;
+        double pi = 4.0*Ncircle/(double)Ntotal;
+        MPI_Reduce(&pi, &recv, 1, MPI_FLOAT, MPI_SUM, 0, MPI_COMM_WORLD);
+        recv = recv/size;
+        if (rank == 0) {
+          printf("Average estimate after %d steps is %f \n", (int)n,pi);
+        }
+
+      }
   }
 
-  long long int globalNcircle=0;
+  /*long long int globalNcircle=0;
   MPI_Allreduce(&Ncircle, &globalNcircle, 1,
                   MPI_LONG_LONG_INT, MPI_SUM, MPI_COMM_WORLD);
 
@@ -51,7 +63,8 @@ int main(int argc, char **argv) {
 
   if (rank==0) 
     printf("Our estimate of pi is %f, the runtime was %g, our 'throughput' was %g \n", pi, endTime-startTime, totalWork/(endTime-startTime));
-  
+  */
+  printf("Our estimate for pi is %f \n", pi);
   MPI_Finalize();
 
   return 0;
