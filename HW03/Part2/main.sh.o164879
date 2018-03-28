@@ -1,0 +1,203 @@
+mpicc -I./. -O3 -g -o main.o -lm -c main.c
+mpicc -I./. -O3 -g -o functions.o -lm -c functions.c
+mpicc  ././main.o ././functions.o -I./. -O3 -g -o main -lm
+
+ElGamal Setup successful.
+p = 22343. 
+g = 1219 is a generator of Z_22343 
+Secret key: x = 21387 
+h = g^x = 5115
+
+Using 1 processes to find the secret key...
+Secret key found! x = 21387 
+Time was: 0.048641, throughput: 459322.503960
+
+ElGamal Setup successful.
+p = 22343. 
+g = 1219 is a generator of Z_22343 
+Secret key: x = 21387 
+h = g^x = 5115
+
+Using 2 processes to find the secret key...
+Secret key found! x = 21387 
+Time was: 0.027861, throughput: 801906.073765
+
+ElGamal Setup successful.
+p = 22343. 
+g = 1219 is a generator of Z_22343 
+Secret key: x = 21387 
+h = g^x = 5115
+
+Using 3 processes to find the secret key...
+Secret key found! x = 21387 
+Time was: 0.018247, throughput: 1224427.893432
+
+ElGamal Setup successful.
+p = 22343. 
+g = 1219 is a generator of Z_22343 
+Secret key: x = 21387 
+h = g^x = 5115
+
+Using 4 processes to find the secret key...
+Secret key found! x = 21387 
+Time was: 0.013314, throughput: 1678082.122522
+
+ElGamal Setup successful.
+p = 22343. 
+g = 1219 is a generator of Z_22343 
+Secret key: x = 21387 
+h = g^x = 5115
+
+Using 5 processes to find the secret key...
+Secret key found! x = 21387 
+Time was: 0.011247, throughput: 1986499.479957
+
+ElGamal Setup successful.
+p = 22343. 
+g = 1219 is a generator of Z_22343 
+Secret key: x = 21387 
+h = g^x = 5115
+
+Using 6 processes to find the secret key...
+Secret key found! x = 21387 
+Time was: 0.009601, throughput: 2327021.106730
+
+ElGamal Setup successful.
+p = 22343. 
+g = 1219 is a generator of Z_22343 
+Secret key: x = 21387 
+h = g^x = 5115
+
+Using 7 processes to find the secret key...
+Secret key found! x = 21387 
+Time was: 0.008928, throughput: 2502447.191177
+
+ElGamal Setup successful.
+p = 22343. 
+g = 1219 is a generator of Z_22343 
+Secret key: x = 21387 
+h = g^x = 5115
+
+Using 8 processes to find the secret key...
+Secret key found! x = 21387 
+Time was: 0.007340, throughput: 3043888.129929
+
+ElGamal Setup successful.
+p = 22343. 
+g = 1219 is a generator of Z_22343 
+Secret key: x = 21387 
+h = g^x = 5115
+
+Using 9 processes to find the secret key...
+Secret key found! x = 21387 
+Time was: 0.007419, throughput: 3011412.686162
+
+ElGamal Setup successful.
+p = 22343. 
+g = 1219 is a generator of Z_22343 
+Secret key: x = 21387 
+h = g^x = 5115
+
+Using 10 processes to find the secret key...
+Secret key found! x = 21387 
+Time was: 0.006057, throughput: 3688610.114859
+
+ElGamal Setup successful.
+p = 22343. 
+g = 1219 is a generator of Z_22343 
+Secret key: x = 21387 
+h = g^x = 5115
+
+Using 11 processes to find the secret key...
+Secret key found! x = 21387 
+Time was: 0.005526, throughput: 4043020.966779
+
+ElGamal Setup successful.
+p = 25919. 
+g = 25105 is a generator of Z_25919 
+Secret key: x = 22741 
+h = g^x = 14335
+
+Using 12 processes to find the secret key...
+Secret key found! x = 22741 
+Time was: 0.005851, throughput: 4429647.164826
+
+ElGamal Setup successful.
+p = 22343. 
+g = 1219 is a generator of Z_22343 
+Secret key: x = 21387 
+h = g^x = 5115
+
+Using 13 processes to find the secret key...
+Secret key found! x = 21387 
+Time was: 0.005118, throughput: 4365264.823590
+
+ElGamal Setup successful.
+p = 22343. 
+g = 1219 is a generator of Z_22343 
+Secret key: x = 21387 
+h = g^x = 5115
+
+Using 14 processes to find the secret key...
+Secret key found! x = 21387 
+Time was: 0.004427, throughput: 5046808.485997
+
+ElGamal Setup successful.
+p = 22343. 
+g = 1219 is a generator of Z_22343 
+Secret key: x = 21387 
+h = g^x = 5115
+
+Using 15 processes to find the secret key...
+Secret key found! x = 21387 
+Time was: 0.004170, throughput: 5357869.637965
+
+ElGamal Setup successful.
+p = 25919. 
+g = 25105 is a generator of Z_25919 
+Secret key: x = 22741 
+h = g^x = 14335
+
+Using 16 processes to find the secret key...
+Secret key found! x = 22741 
+Time was: 0.004409, throughput: 5878648.662773
+
+ElGamal Setup successful.
+p = 25919. 
+g = 25105 is a generator of Z_25919 
+Secret key: x = 22741 
+h = g^x = 14335
+
+Using 17 processes to find the secret key...
+Secret key found! x = 22741 
+Time was: 0.005080, throughput: 5101983.905383
+
+ElGamal Setup successful.
+p = 22343. 
+g = 1219 is a generator of Z_22343 
+Secret key: x = 21387 
+h = g^x = 5115
+
+Using 18 processes to find the secret key...
+Secret key found! x = 21387 
+Time was: 0.003716, throughput: 6012391.888105
+
+ElGamal Setup successful.
+p = 25919. 
+g = 25105 is a generator of Z_25919 
+Secret key: x = 22741 
+h = g^x = 14335
+
+Using 19 processes to find the secret key...
+Secret key found! x = 22741 
+Time was: 0.005210, throughput: 4974510.184963
+
+ElGamal Setup successful.
+p = 25919. 
+g = 25105 is a generator of Z_25919 
+Secret key: x = 22741 
+h = g^x = 14335
+
+Using 20 processes to find the secret key...
+Secret key found! x = 22741 
+Time was: 0.003824, throughput: 6777727.481264
