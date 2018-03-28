@@ -58,15 +58,17 @@ int main (int argc, char **argv) {
   unsigned int start, end;
   unsigned int chunk;
   unsigned int rem = N%size;
+  double startTime, finalTime;
   chunk = N/size; 
   start = chunk*rank; 
   end = start + (chunk); 
+  
   if (rank<rem && rem != 0) {
     end = end + 1;
     rem = rem - 1;
+    //start = (rank*chunk)+rem;
+    //end = start+chunk+1;
   }
-  //rem = N%size
-  double startTime, finalTime;
   startTime = MPI_Wtime();
   //loop through the values from 'start' to 'end'
   for (unsigned int i=start;i<end;i++) {
@@ -75,7 +77,7 @@ int main (int argc, char **argv) {
   }
   MPI_Barrier(MPI_COMM_WORLD);
   finalTime=MPI_Wtime()-startTime;
-  double throughput = N/finalTime;
+  double throughput =(N-start)/finalTime;
   if (rank == 0) {
     printf("Time was: %f, throughput: %f\n",finalTime,throughput);
   }

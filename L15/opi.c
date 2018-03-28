@@ -9,7 +9,7 @@ int main(int argc, char **argv) {
   //seed random number generator
   // Q2b: get the number of threads to run with from agrv and 
   // add OpenMP API code to set number of threads here
-  double start = omp_get_wtime();
+  double start;// = omp_get_wtime();
   double end;
   int Nthreads = atoi(argv[0]);
 
@@ -20,25 +20,20 @@ int main(int argc, char **argv) {
 
   // Q2c: add an OpenMP parallel region here, wherein each thread initializes 
   //      one entry in drandData using srand48_r and seed based on thread number
-
-  long int seed = 0;
-  long long int Ntrials = 10000000;
-
-
-    //need running tallies
-  long long int Ntotal=0;
-  long long int Ncircle=0;
   #pragma omp parallel
   {
-   // start = omp_get_wtime();
-    srand48_r(seed, drandData+0);
-    //long long int Ntrials = 10000000;
-    //need running tallies
-    //long long int Ntotal=0;
-    //long long int Ncircle=0;
-  }  
+    int rank = omp_get_thread_num();
+    long int seed = rank;
+    srand48_r(seed, drandData + rank);
+  }
+  //long int seed = 0;
+  long long int Ntrials = 10000000;
+
+  //need running tallies
+  long long int Ntotal=0;
+  long long int Ncircle=0;
+  start = omp_get_wtime();  
   #pragma omp parallel for reduction(+ : Ncircle)  
-  //{
     for (long long int n=0; n<Ntrials; n++) {
       double rand1;
       double rand2;
@@ -56,17 +51,21 @@ int main(int argc, char **argv) {
 
       if (n%100 ==0) {
         double pi = 4.0*Ncircle/ (double) (n);
-        printf("Our estimate of pi is %g \n", pi);
+        //printf("Our estimate of pi is %g \n", pi);
       }
-      end = omp_get_wtime();
+      //end = omp_get_wtime();
     }
-    //end = omp_get_wtime();
-  //}
+  //end = omp_get_wtime()-start;
+  //printf("The total time was %f\n",end);
 
   double pi = 4.0*Ncircle/ (double) (Ntotal);
   printf("Our final estimate of pi is %g \n", pi);
-  //end = omp_get_wtime();
+  
   free(drandData);
+  end = omp_get_wtime() - start;
+  printf("The total time was %f\n", end);
+  
+  //free(drandData);
   
   return 0;
 }
