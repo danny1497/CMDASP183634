@@ -62,7 +62,7 @@ int testpoint(complex_t c){
 // record the  iteration counts in the count array
 
 // Q2c: transform this function into a CUDA kernel
-__global__ void  kernelmandelbrot(int Nre, int Nim, complex_t cmin, complex_t cmax, float *count){ 
+__global__ void mandelbrot(int Nre, int Nim, complex_t cmin, complex_t cmax, float *count){ 
   
   int tIdx = threadIdx.x;
   int tIdy = threadIdx.y;
@@ -86,7 +86,7 @@ __global__ void  kernelmandelbrot(int Nre, int Nim, complex_t cmin, complex_t cm
   c.r = cmin.r + dr*i;
   c.i = cmin.i + di*j;
       
-  count[i+j*Nre] = __device__ testpoint(c);
+  count[i+j*Nre] = testpoint(c);
       
 
 }
@@ -102,10 +102,9 @@ int main(int argc, char **argv){
   int Nthreads = atoi(argv[3]);
 
   // Q2b: set the number of threads per block and the number of blocks here:
-  
   //Nthreads = 32;
   //int Nblocks = (Nre+Nthreads-1)/Nthreads
-  int nx = 4096;
+  /*int nx = 4096;
   int ny = 4096;
   int Nblocks = (Nre+Mthreads-1)/Nthreads;
   int Bx = Nthreads;
@@ -115,12 +114,13 @@ int main(int argc, char **argv){
   int Gy =  (ny + Nthreads -1)/Nthreads
 
   dim3 B(Bx,By,1);
-  dim3 G(Gx,Gy,1);
+  dim3 G(Gx,Gy,1);*/
   // int N = nx*ny;
  
   // storage for the iteration counts
-  float *count = (float*) malloc(Nre*Nim*sizeof(float));
-  cudaMalloc(&count,Nre*Nim*sizeof(float));
+  float *h_count = (float*) malloc(Nre*Nim*sizeof(float));
+  float *d_count;
+  cudaMalloc(&d_count,Nre*Nim*sizeof(float));
     
   // Parameters for a bounding box for "c" that generates an interesting image
   const float centRe = -.759856, centIm= .125547;
@@ -134,13 +134,17 @@ int main(int argc, char **argv){
   cmin.i = centIm - 0.5*diam;
   cmax.i = centIm + 0.5*diam;
 
-  clock_t start = clock(); //start time in CPU cycles
+  dim3 B(Nthreads,Nthreads,1);
+  dim3 G((Nre+Nthreads-1)/Nthreads,(Nim+Nthreads-1)/Nthreads,1);  
 
+  clock_t start = clock(); //start time in CPU cycles
+  
   // compute mandelbrot set
-  kernelmandelbrot <<< G, B >>> (Nre, Nim, cmin, cmax, count); 
+  kernelmandelbrot <<< G, B >>> (Nre, Nim, cmin, cmax,d_count); 
   cudaDeviceSynchronize();
-  cudaMemcpy();
-  clock_t end = clock(); //start time in CPU cycles
+  clock_t end = clock();
+  cudaMemcpy(h_count,d_count,Nre*Nim*sizeof(float),cudaDeviceToHost);
+  //clock_t end = clock(); //start time in CPU cycles
   
   // print elapsed time
   printf("elapsed = %f\n", ((double)(end-start))/CLOCKS_PER_SEC);
@@ -152,8 +156,8 @@ int main(int argc, char **argv){
   write_hot_png(fp, Nre, Nim, count, 0, 80);
   printf("done.\n");
 
-  free(count);
-
+  free(h_count);
+  cudaFree(d_count);
   exit(0);
   return 0;
 }  
