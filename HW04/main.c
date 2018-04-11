@@ -14,8 +14,8 @@ int main (int argc, char **argv) {
   omp_set_num_threads(Nthreads);
 
 	//seed value for the randomizer 
-  double seed = clock(); //this will make your program run differently everytime
-  //double seed = 0; //uncomment this and your program will behave the same everytime it's run
+  //double seed = clock(); //this will make your program run differently everytime
+  double seed = 0; //uncomment this and your program will behave the same everytime it's run
 
   srand(seed);
 
@@ -91,7 +91,7 @@ int main (int argc, char **argv) {
   unsigned int stop = 0;
   #pragma omp parallel for shared(stop)
   for (unsigned int i=0;i<p-1;i++) {
-    if (modExp(g,i+1,p)==h && stop == 0) {
+    if (stop==0 && modExp(g,i+1,p)==h) {
       printf("Secret key found! x = %u \n", i+1);
       stop = 1;
     }

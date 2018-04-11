@@ -143,7 +143,7 @@ int main(int argc, char **argv){
   kernelmandelbrot <<< G, B >>> (Nre, Nim, cmin, cmax,d_count); 
   cudaDeviceSynchronize();
   clock_t end = clock();
-  cudaMemcpy(h_count,d_count,Nre*Nim*sizeof(float),cudaDeviceToHost);
+  cudaMemcpy(h_count,d_count,Nre*Nim*sizeof(float),cudaMemcpyDeviceToHost);
   //clock_t end = clock(); //start time in CPU cycles
   
   // print elapsed time
