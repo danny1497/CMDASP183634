@@ -32,7 +32,7 @@ typedef struct {
 }complex_t;
 
 // return iterations before z leaves mandelbrot set for given c
-int testpoint(complex_t c){
+__device__ int testpoint(complex_t c){
   
   int iter;
 
@@ -74,7 +74,7 @@ __global__ void mandelbrot(int Nre, int Nim, complex_t cmin, complex_t cmax, flo
   int bSizey = blockDim.y;
 
   int i = tIdx + bIdx*bSizex;
-  int j = tIdy + bIdy*sizey;  
+  int j = tIdy + bIdy*bSizey;  
 
   //int n,m;
 
@@ -140,7 +140,7 @@ int main(int argc, char **argv){
   clock_t start = clock(); //start time in CPU cycles
   
   // compute mandelbrot set
-  kernelmandelbrot <<< G, B >>> (Nre, Nim, cmin, cmax,d_count); 
+  mandelbrot <<< G, B >>> (Nre, Nim, cmin, cmax,d_count); 
   cudaDeviceSynchronize();
   clock_t end = clock();
   cudaMemcpy(h_count,d_count,Nre*Nim*sizeof(float),cudaMemcpyDeviceToHost);
@@ -153,7 +153,7 @@ int main(int argc, char **argv){
   FILE *fp = fopen("mandelbrot.png", "w");
 
   printf("Printing mandelbrot.png...");
-  write_hot_png(fp, Nre, Nim, count, 0, 80);
+  write_hot_png(fp, Nre, Nim,h_count, 0, 80);
   printf("done.\n");
 
   free(h_count);
