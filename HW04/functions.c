@@ -210,34 +210,33 @@ void convertStringToZ(unsigned char *string, unsigned int Nchars,
   unsigned int size = 256;
   unsigned int sizeSquare = 256*256;
   unsigned int len = strlen(string);
-  if (Nchars/Nints == 1) {
-    #pragma omp parallel for
-    for (unsigned int i = 0; i < len; i++) {
-      Z[i] = (unsigned int)string[i];
-    }
-  }
-
-  if (Nchars/Nints == 2) {
-    #pragma omp parallel for
-    for (unsigned int i = 0; i < len; i++) {
-      if(i%2==0) {  
-        unsigned int num = (unsigned int)string[i]*size;
-        unsigned int num2 = (unsigned int)string[i+1];
-        Z[i/2] = num + num2;
+  
+  if (Nchars/Nints ==1) {
+      #pragma omp parallel for
+      for (unsigned int i = 0; i < len; i++) {
+        Z[i] = (unsigned int)string[i];
       }
-    }
   }
-
-  if (Nchars/Nints == 3) {
-    #pragma omp parallel for
-    for (unsigned int i = 0; i < len; i++) {
-      if(i%3==0) {
-        unsigned int num = (unsigned int)string[i]*sizeSquare;
-        unsigned int num2 = (unsigned int)string[i+1]*size;
-        unsigned int num3 = (unsigned int)string[i+2];
-        Z[i/3] = num + num2 + num3;
+  if (Nchars/Nints==2) {
+      #pragma omp parallel for
+      for (unsigned int i = 0; i < len; i++) {
+        if(i%2==0) {  
+          unsigned int a = (unsigned int)string[i];
+          unsigned int b = (unsigned int)string[i+1];
+          Z[i/2] = a*size + b;
+        }
       }
-    }
+  }
+  if (Nchars/Nints ==3) {
+      #pragma omp parallel for
+      for (unsigned int i = 0; i < len; i++) {
+        if(i%3==0) {
+          unsigned int a = (unsigned int)string[i];
+          unsigned int b = (unsigned int)string[i+1];
+          unsigned int c = (unsigned int)string[i+2];
+          Z[i/3] = a*sizeSquare + b*size + c;
+        }
+      }
   } 
 }
 
@@ -250,22 +249,21 @@ void convertZToString(unsigned int  *Z,      unsigned int Nints,
   unsigned int size = 256;
   unsigned int sizeSquare = 256*256;
   //unsigned int temp = (unsigned int)Z[i];
-  if (Nchars/Nints == 1) {
+
+  if (Nchars/Nints==1) {
     #pragma omp parallel for
     for (unsigned int i = 0; i < Nints; i++) {
         string[i] = (unsigned char)Z[i];
     }
   }
- 
-  if (Nchars/Nints == 2) {
+  if (Nchars/Nints==2) {
     #pragma omp parallel for
     for (unsigned int i = 0; i < Nints; i++) {
         string[i*2] = (unsigned char)(Z[i]/size);
         string[i*2+1] = (unsigned char)(Z[i]%size);
     }
   }
-
-  if (Nchars/Nints == 3) {
+  if (Nchars/Nints==3) {
     #pragma omp parallel for
     for (unsigned int i = 0; i < Nints; i++) {
         string[i*3] = (unsigned char)(Z[i]/(sizeSquare));
