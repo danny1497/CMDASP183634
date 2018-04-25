@@ -1,0 +1,93 @@
+mpicc -I./. -O3 -g -o main.o -lm -c main.c
+mpicc -I./. -O3 -g -o functions.o -lm -c functions.c
+mpicc  ././main.o ././functions.o -I./. -O3 -g -o main -lm
+
+ElGamal Setup successful.
+p = 28446527. 
+g = 11101162 is a generator of Z_28446527 
+Secret key: x = 4870927 
+h = g^x = 21725945
+
+Using 1 processes to find the secret key...
+Secret key found! x = 4870927 
+Time was: 220.594777, throughput: 128953.760392
+
+ElGamal Setup successful.
+p = 28446527. 
+g = 11101162 is a generator of Z_28446527 
+Secret key: x = 4870927 
+h = g^x = 21725945
+
+Using 2 processes to find the secret key...
+Secret key found! x = 4870927 
+Time was: 114.019553, throughput: 249488.137828
+
+ElGamal Setup successful.
+p = 28446527. 
+g = 11101162 is a generator of Z_28446527 
+Secret key: x = 4870927 
+h = g^x = 21725945
+
+Using 3 processes to find the secret key...
+Secret key found! x = 4870927 
+Time was: 76.381966, throughput: 372424.638118
+
+ElGamal Setup successful.
+p = 28446527. 
+g = 11101162 is a generator of Z_28446527 
+Secret key: x = 4870927 
+h = g^x = 21725945
+
+Using 4 processes to find the secret key...
+Secret key found! x = 4870927 
+Time was: 57.468019, throughput: 494997.504538
+
+ElGamal Setup successful.
+p = 28446527. 
+g = 11101162 is a generator of Z_28446527 
+Secret key: x = 4870927 
+h = g^x = 21725945
+
+Using 5 processes to find the secret key...
+Secret key found! x = 4870927 
+Time was: 46.052479, throughput: 617698.039280
+
+ElGamal Setup successful.
+p = 28446527. 
+g = 11101162 is a generator of Z_28446527 
+Secret key: x = 4870927 
+h = g^x = 21725945
+
+Using 6 processes to find the secret key...
+Secret key found! x = 4870927 
+Time was: 38.406148, throughput: 740676.358779
+
+ElGamal Setup successful.
+p = 28446527. 
+g = 11101162 is a generator of Z_28446527 
+Secret key: x = 4870927 
+h = g^x = 21725945
+
+Using 7 processes to find the secret key...
+Secret key found! x = 4870927 
+Time was: 32.907396, throughput: 864441.724243
+
+ElGamal Setup successful.
+p = 28446527. 
+g = 11101162 is a generator of Z_28446527 
+Secret key: x = 4870927 
+h = g^x = 21725945
+
+Using 8 processes to find the secret key...
+Secret key found! x = 4870927 
+Time was: 28.771418, throughput: 988707.817822
+
+ElGamal Setup successful.
+p = 28446527. 
+g = 11101162 is a generator of Z_28446527 
+Secret key: x = 4870927 
+h = g^x = 21725945
+
+Using 9 processes to find the secret key...
+Secret key found! x = 4870927 
+=>> PBS: job killed: walltime 645 exceeded limit 600
